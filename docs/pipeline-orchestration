@@ -1,0 +1,18 @@
+# Pipeline Orchestration
+
+## Workflow
+1. Bronze ingestion
+2. Silver transformation
+3. Gold analytics
+4. Data quality monitoring
+
+## Dependencies
+Each task starts only after its upstream task succeeds.
+
+## Validation
+Task statuses, output tables, and data quality audit
+records are checked after each run.
+
+## Limitations
+The initial Bronze stage uses synthetic sample data.
+Incremental ingestion is maintained as a separate test.
