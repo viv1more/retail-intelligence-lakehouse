@@ -1,0 +1,1 @@
+An end-to-end retail data engineering project using PySpark and Databricks, implementing a Delta Lake medallion architecture with data ingestion, data quality validation, incremental processing, and business-ready analytics.
