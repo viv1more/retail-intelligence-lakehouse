@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retail Intelligence Lakehouse | Dashboard</title>
+<style>
+:root{--navy:#112b4e;--navy2:#193d68;--bg:#f3f7fc;--card:#fff;--ink:#172b4d;--muted:#667892;--line:#dfe8f2;--blue:#2878e8;--teal:#12a886;--orange:#f59e0b;--purple:#7957d5;--red:#e45454;--shadow:0 8px 24px rgba(20,48,84,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}.topbar{background:linear-gradient(110deg,var(--navy),var(--navy2));color:white;padding:22px clamp(16px,3vw,38px);display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:14px}.logo{width:46px;height:46px;border:1px solid #8db5e7;border-radius:13px;display:grid;place-items:center;font-size:24px;background:#ffffff12}.brand h1{margin:0;font-size:clamp(20px,2.3vw,30px);letter-spacing:-.5px}.brand p{margin:5px 0 0;color:#d6e5f7;font-size:13px}.topmeta{font-size:12px;color:#d6e5f7}.wrap{max-width:1600px;margin:auto;padding:22px clamp(12px,2vw,28px) 40px}.notice{padding:14px 16px;background:#eaf3ff;border:1px solid #c8defb;border-radius:12px;color:#24476f;font-size:13px;line-height:1.5;margin-bottom:18px}.notice strong{display:block;margin-bottom:3px}.upload-grid{display:grid;grid-template-columns:repeat(4,minmax(190px,1fr));gap:12px;margin-bottom:20px}.upload-card,.panel,.kpi{background:var(--card);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}.upload-card{padding:14px}.upload-card h3{font-size:13px;margin:0 0 7px}.upload-card p{font-size:11px;line-height:1.5;color:var(--muted);margin:0 0 10px}.upload-card input{width:100%;font-size:12px}.filters{display:flex;gap:10px;align-items:end;flex-wrap:wrap;background:white;padding:14px;border:1px solid var(--line);border-radius:14px;margin-bottom:16px}.field{display:flex;flex-direction:column;gap:6px;min-width:145px;flex:1}.field label{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px}.field select,.field input{width:100%;padding:9px 10px;border:1px solid #d6e1ee;border-radius:9px;background:#fff;color:var(--ink);font-size:13px}.btn{border:0;border-radius:9px;padding:10px 14px;background:var(--navy2);color:#fff;font-weight:650;cursor:pointer}.btn.secondary{background:#eaf0f7;color:var(--navy)}.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:16px}.kpi{padding:17px;display:flex;gap:13px;align-items:center;min-height:112px}.kpi-icon{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:21px;flex-shrink:0}.blue{background:#e6f0ff;color:var(--blue)}.green{background:#e0f7ef;color:var(--teal)}.purple{background:#eee8ff;color:var(--purple)}.orange{background:#fff0dc;color:#e68100}.kpi-label{font-size:12px;color:var(--muted);margin-bottom:5px}.kpi-value{font-size:clamp(20px,2vw,27px);font-weight:800;letter-spacing:-.6px}.kpi-sub{font-size:11px;color:var(--muted);margin-top:5px}.charts{display:grid;grid-template-columns:1.25fr 1fr 1.1fr;gap:14px;margin-bottom:14px}.charts.second{grid-template-columns:1fr 1fr 1fr}.panel{padding:16px;min-width:0}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.panel h2{font-size:15px;margin:0;letter-spacing:-.2px}.subhead{font-size:11px;color:var(--muted)}.chartbox{height:260px;position:relative}.chartbox canvas{width:100%;height:100%}.lower{display:grid;grid-template-columns:1.25fr 1fr;gap:14px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap}th{background:#f1f5fa;color:#51657f;font-size:10px;text-transform:uppercase;letter-spacing:.45px;text-align:left}td,th{padding:10px 11px;border-bottom:1px solid #e8eef5}tbody tr:hover{background:#f8fbff}.status{padding:4px 7px;border-radius:20px;background:#e5f8ef;color:#087b54;font-size:10px}.empty{height:100%;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);font-size:13px;padding:22px;border:1px dashed #d4e0ed;border-radius:10px;line-height:1.6}.empty strong{display:block;color:var(--ink);margin-bottom:5px}.foot{padding:22px 4px 0;color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.pill{display:inline-flex;padding:5px 8px;border-radius:20px;background:#edf3fa;color:#49627f;font-size:10px;font-weight:700}.error{color:#b42318;background:#fff0ef;border:1px solid #f5c7c4;padding:10px 12px;border-radius:9px;font-size:12px;margin-bottom:12px;display:none}
+@media(max-width:1100px){.upload-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.charts,.charts.second{grid-template-columns:repeat(2,minmax(0,1fr))}.charts .panel:last-child{grid-column:span 2}}@media(max-width:700px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.charts,.charts.second,.lower{grid-template-columns:1fr}.charts .panel:last-child{grid-column:auto}.upload-grid{grid-template-columns:1fr}.chartbox{height:235px}.topbar{align-items:flex-start}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="logo">▥</div><div><h1>Retail Intelligence Lakehouse</h1><p>Sales performance · Product analytics · Regional insights</p></div></div>
+  <div class="topmeta">DATABRICKS · PYSPARK · DELTA LAKE<br><span id="dataState">Waiting for your Gold table exports</span></div>
+</header>
+<main class="wrap">
+  <div class="notice"><strong>Connect your real project data</strong>This dashboard starts empty on purpose—no demo metrics are fabricated. Export the Gold tables from Databricks as CSV and upload them below. All charts and KPIs will be calculated from the files you provide. Data stays in this browser session.</div>
+  <div id="errorBox" class="error"></div>
+  <section class="upload-grid">
+    <div class="upload-card"><h3>① Daily Sales Gold (required)</h3><p>CSV from <code>streaming_gold_daily_sales</code><br>Columns: order_date, total_orders, units_sold, total_revenue</p><input id="dailyFile" type="file" accept=".csv,text/csv"></div>
+    <div class="upload-card"><h3>② Product Performance Gold</h3><p>CSV from <code>streaming_gold_product_performance</code><br>Columns: product_id, total_orders, units_sold, total_revenue</p><input id="productFile" type="file" accept=".csv,text/csv"></div>
+    <div class="upload-card"><h3>③ Regional Sales Gold</h3><p>CSV from <code>streaming_gold_regional_sales</code><br>Columns: region, total_orders, units_sold, total_revenue</p><input id="regionalFile" type="file" accept=".csv,text/csv"></div>
+    <div class="upload-card"><h3>④ Silver Orders (optional)</h3><p>CSV from <code>streaming_orders_silver</code><br>Enables order status and recent-order detail when those columns exist.</p><input id="ordersFile" type="file" accept=".csv,text/csv"></div>
+  </section>
+  <section class="filters">
+    <div class="field"><label for="dateFrom">From date</label><input type="date" id="dateFrom"></div>
+    <div class="field"><label for="dateTo">To date</label><input type="date" id="dateTo"></div>
+    <div class="field"><label for="regionFilter">Region</label><select id="regionFilter"><option value="">All regions</option></select></div>
+    <div class="field"><label for="statusFilter">Order status (Silver CSV)</label><select id="statusFilter"><option value="">All statuses</option></select></div>
+    <button class="btn secondary" id="resetBtn">Reset filters</button>
+  </section>
+  <section class="kpis">
+    <div class="kpi"><div class="kpi-icon green">₹</div><div><div class="kpi-label">Total Revenue</div><div class="kpi-value" id="revenueKpi">—</div><div class="kpi-sub">From daily Gold data</div></div></div>
+    <div class="kpi"><div class="kpi-icon blue">▤</div><div><div class="kpi-label">Completed / Reported Orders</div><div class="kpi-value" id="ordersKpi">—</div><div class="kpi-sub">Sum of daily order counts</div></div></div>
+    <div class="kpi"><div class="kpi-icon purple">◇</div><div><div class="kpi-label">Units Sold</div><div class="kpi-value" id="unitsKpi">—</div><div class="kpi-sub">From daily Gold data</div></div></div>
+    <div class="kpi"><div class="kpi-icon orange">↗</div><div><div class="kpi-label">Average Order Value</div><div class="kpi-value" id="aovKpi">—</div><div class="kpi-sub">Revenue ÷ reported orders</div></div></div>
+  </section>
+  <section class="charts">
+    <div class="panel"><div class="panel-head"><h2>Daily Revenue Trend</h2><span class="pill">GOLD</span></div><div class="chartbox" id="dailyChartWrap"><canvas id="dailyChart"></canvas><div class="empty"><div><strong>Waiting for daily sales CSV</strong>Upload the daily Gold table to draw this trend.</div></div></div></div>
+    <div class="panel"><div class="panel-head"><h2>Sales by Region</h2><span class="pill">GOLD</span></div><div class="chartbox" id="regionChartWrap"><canvas id="regionChart"></canvas><div class="empty"><div><strong>Waiting for regional CSV</strong>Upload the regional Gold table to compare regions.</div></div></div></div>
+    <div class="panel"><div class="panel-head"><h2>Top Products by Revenue</h2><span class="pill">GOLD</span></div><div class="chartbox" id="productChartWrap"><canvas id="productChart"></canvas><div class="empty"><div><strong>Waiting for product CSV</strong>Upload the product Gold table to rank products.</div></div></div></div>
+  </section>
+  <section class="charts second">
+    <div class="panel"><div class="panel-head"><h2>Orders & Units by Day</h2><span class="pill">GOLD</span></div><div class="chartbox" id="volumeChartWrap"><canvas id="volumeChart"></canvas><div class="empty"><div><strong>Waiting for daily sales CSV</strong>Order and unit trends will appear here.</div></div></div></div>
+    <div class="panel"><div class="panel-head"><h2>Order Status Mix</h2><span class="pill">SILVER</span></div><div class="chartbox" id="statusChartWrap"><canvas id="statusChart"></canvas><div class="empty"><div><strong>Optional Silver export</strong>Upload Silver orders with a <code>status</code> column.</div></div></div></div>
+    <div class="panel"><div class="panel-head"><h2>Regional KPI Summary</h2><span class="pill">GOLD</span></div><div class="tablewrap" id="regionalTableWrap"><div class="empty"><div><strong>Waiting for regional CSV</strong>Regional metrics will appear here.</div></div></div></div>
+  </section>
+  <section class="lower">
+    <div class="panel"><div class="panel-head"><h2>Recent Orders</h2><span class="subhead">Requires optional Silver export</span></div><div class="tablewrap" id="ordersTableWrap"><div class="empty"><div><strong>No Silver order file loaded</strong>Upload the Silver table to inspect recent orders.</div></div></div></div>
+    <div class="panel"><div class="panel-head"><h2>Data Readiness</h2><span class="subhead">Based on uploaded files</span></div><div class="tablewrap"><table><thead><tr><th>Dataset</th><th>Status</th><th>Rows</th></tr></thead><tbody id="readinessBody"><tr><td>Daily Sales Gold</td><td>Waiting</td><td>—</td></tr><tr><td>Product Gold</td><td>Waiting</td><td>—</td></tr><tr><td>Regional Gold</td><td>Waiting</td><td>—</td></tr><tr><td>Silver Orders</td><td>Optional</td><td>—</td></tr></tbody></table></div><p class="subhead" style="line-height:1.6;margin-top:12px">The dashboard does not connect directly to Databricks. Export the table results as CSV, then upload them here. Reloading the page clears the current data.</p></div>
+  </section>
+  <div class="foot"><span>Real-Time Retail Intelligence Lakehouse · Portfolio dashboard</span><span id="lastUpdated">No data loaded</span></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const data={daily:[],product:[],regional:[],orders:[]}; const charts={};
+const $=id=>document.getElementById(id);
+function parseCSV(text){
+ const rows=[]; let row=[],field='',quoted=false;
+ for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];
+  if(c==='"'&&quoted&&n==='"'){field+='"';i++}
+  else if(c==='"'){quoted=!quoted}
+  else if(c===','&&!quoted){row.push(field);field=''}
+  else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&n==='\n')i++;row.push(field);if(row.some(x=>x.trim()!==''))rows.push(row);row=[];field=''}
+  else field+=c;
+ }
+ if(field.length||row.length){row.push(field);rows.push(row)}
+ if(rows.length<2)return [];
+ const headers=rows.shift().map(x=>x.trim().replace(/^\uFEFF/,'').toLowerCase());
+ return rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h,(r[i]??'').trim()])));
+}
+function num(v){if(v===null||v===undefined||v==='')return 0;const n=Number(String(v).replace(/[₹,\s]/g,''));return Number.isFinite(n)?n:0}
+function dateStr(v){if(!v)return '';const d=new Date(v);return Number.isNaN(d.getTime())?String(v).slice(0,10):d.toISOString().slice(0,10)}
+function money(v){return '₹'+Number(v||0).toLocaleString('en-IN',{maximumFractionDigits:2,minimumFractionDigits:0})}
+function intFmt(v){return Number(v||0).toLocaleString('en-IN',{maximumFractionDigits:0})}
+function setError(msg){const e=$('errorBox');e.style.display=msg?'block':'none';e.textContent=msg||''}
+function fileLoad(inputId,key,requiredCols,label){
+ $(inputId).addEventListener('change',async e=>{
+  const file=e.target.files[0];if(!file)return;
+  try{
+   const rows=parseCSV(await file.text());
+   if(!rows.length)throw new Error('No data rows found in '+file.name);
+   const headers=Object.keys(rows[0]);
+   const missing=requiredCols.filter(c=>!headers.includes(c));
+   if(missing.length)throw new Error(label+' is missing required columns: '+missing.join(', '));
+   data[key]=rows;
+   setError(''); updateDashboard(); updateReadiness();
+   $('dataState').textContent='Data loaded from CSV exports';
+   $('lastUpdated').textContent='Loaded '+new Date().toLocaleString();
+  }catch(err){setError(err.message);e.target.value=''}
+ });
+}
+fileLoad('dailyFile','daily',['order_date','total_orders','units_sold','total_revenue'],'Daily Gold');
+fileLoad('productFile','product',['product_id','total_revenue'],'Product Gold');
+fileLoad('regionalFile','regional',['region','total_revenue'],'Regional Gold');
+fileLoad('ordersFile','orders',['order_id'],'Silver orders');
+function chart(id,config){if(!window.Chart)return; if(charts[id])charts[id].destroy();charts[id]=new Chart($(id),config)}
+const palette=['#2878e8','#12a886','#f59e0b','#e45454','#7957d5','#e56bb5','#22a6b3','#7b8aa4'];
+function showChart(wrapId,show){const wrap=$(wrapId);const canvas=wrap.querySelector('canvas'),empty=wrap.querySelector('.empty');canvas.style.display=show?'block':'none';if(empty)empty.style.display=show?'none':'flex'}
+function populateSelect(id,values,allLabel){const el=$(id),old=el.value;el.innerHTML='';const opt=document.createElement('option');opt.value='';opt.textContent=allLabel;el.appendChild(opt);[...new Set(values.filter(Boolean))].sort().forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;el.appendChild(o)});if([...el.options].some(o=>o.value===old))el.value=old}
+function filteredDaily(){const from=$('dateFrom').value,to=$('dateTo').value;return data.daily.filter(r=>{const d=dateStr(r.order_date);return (!from||d>=from)&&(!to||d<=to)})}
+function filteredRegional(){const selected=$('regionFilter').value;return data.regional.filter(r=>!selected||String(r.region)===selected)}
+function filteredOrders(){const from=$('dateFrom').value,to=$('dateTo').value,region=$('regionFilter').value,status=$('statusFilter').value;return data.orders.filter(r=>{const d=dateStr(r.order_date);return (!from||!d||d>=from)&&(!to||!d||d<=to)&&(!region||String(r.region||'')===region)&&(!status||String(r.status||'')===status)})}
+function updateDashboard(){
+ const daily=filteredDaily(),regional=filteredRegional(),orders=filteredOrders();
+ const revenue=daily.reduce((s,r)=>s+num(r.total_revenue),0),orderCount=daily.reduce((s,r)=>s+num(r.total_orders),0),units=daily.reduce((s,r)=>s+num(r.units_sold),0);
+ $('revenueKpi').textContent=data.daily.length?money(revenue):'—';$('ordersKpi').textContent=data.daily.length?intFmt(orderCount):'—';$('unitsKpi').textContent=data.daily.length?intFmt(units):'—';$('aovKpi').textContent=data.daily.length?(orderCount?money(revenue/orderCount):'₹0'):'—';
+ if(daily.length){showChart('dailyChartWrap',true);chart('dailyChart',{type:'line',data:{labels:daily.map(r=>dateStr(r.order_date)),datasets:[{label:'Revenue',data:daily.map(r=>num(r.total_revenue)),borderColor:palette[0],backgroundColor:'rgba(40,120,232,.13)',fill:true,tension:.28,pointRadius:3}]},options:chartOpts('₹')});
+ showChart('volumeChartWrap',true);chart('volumeChart',{type:'bar',data:{labels:daily.map(r=>dateStr(r.order_date)),datasets:[{label:'Orders',data:daily.map(r=>num(r.total_orders)),backgroundColor:palette[0],borderRadius:4},{label:'Units sold',data:daily.map(r=>num(r.units_sold)),backgroundColor:palette[1],borderRadius:4}]},options:chartOpts('')});
+ }else{showChart('dailyChartWrap',false);showChart('volumeChartWrap',false)}
+ if(regional.length){showChart('regionChartWrap',true);chart('regionChart',{type:'doughnut',data:{labels:regional.map(r=>r.region),datasets:[{data:regional.map(r=>num(r.total_revenue)),backgroundColor:palette,borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:10,usePointStyle:true,font:{size:10}}},tooltip:{callbacks:{label:c=>c.label+': '+money(c.raw)}}}}});renderRegionalTable(regional)}else{showChart('regionChartWrap',false);$('regionalTableWrap').innerHTML='<div class="empty"><div><strong>Waiting for regional CSV</strong>Regional metrics will appear here.</div></div>'}
+ if(data.product.length){const products=[...data.product].sort((a,b)=>num(b.total_revenue)-num(a.total_revenue)).slice(0,10);showChart('productChartWrap',true);chart('productChart',{type:'bar',data:{labels:products.map(r=>r.product_name||r.product_id),datasets:[{label:'Revenue',data:products.map(r=>num(r.total_revenue)),backgroundColor:products.map((_,i)=>palette[i%palette.length]),borderRadius:4}]},options:{...chartOpts('₹'),indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>money(c.raw)}}}}})}else showChart('productChartWrap',false);
+ if(data.orders.length){const statuses={};orders.forEach(r=>{const s=r.status||'Unknown';statuses[s]=(statuses[s]||0)+1});showChart('statusChartWrap',true);chart('statusChart',{type:'doughnut',data:{labels:Object.keys(statuses),datasets:[{data:Object.values(statuses),backgroundColor:palette,borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:10,usePointStyle:true,font:{size:10}}}}}});renderOrders(orders)}else{showChart('statusChartWrap',false);$('ordersTableWrap').innerHTML='<div class="empty"><div><strong>No Silver order file loaded</strong>Upload the Silver table to inspect recent orders.</div></div>'}
+}
+function chartOpts(prefix){return {responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{legend:{position:'bottom',labels:{boxWidth:10,usePointStyle:true,font:{size:10}}},tooltip:{callbacks:{label:c=>(c.dataset.label?c.dataset.label+': ':'')+(prefix==='₹'?money(c.raw):intFmt(c.raw))}}},scales:{x:{grid:{display:false},ticks:{maxRotation:0,maxTicksLimit:8,font:{size:10}}},y:{beginAtZero:true,grid:{color:'#edf1f6'},ticks:{font:{size:10},callback:v=>prefix==='₹'?(v>=100000?'₹'+(v/100000).toFixed(1)+'L':v>=1000?'₹'+(v/1000).toFixed(0)+'k':'₹'+v):v}}}}}
+function renderRegionalTable(rows){const total=rows.reduce((s,r)=>s+num(r.total_revenue),0);$('regionalTableWrap').innerHTML='<table><thead><tr><th>Region</th><th>Revenue</th><th>Orders</th><th>Units</th></tr></thead><tbody>'+rows.slice().sort((a,b)=>num(b.total_revenue)-num(a.total_revenue)).map(r=>`<tr><td>${esc(r.region)}</td><td>${money(num(r.total_revenue))}</td><td>${r.total_orders==null?'—':intFmt(num(r.total_orders))}</td><td>${r.units_sold==null?'—':intFmt(num(r.units_sold))}</td></tr>`).join('')+`<tr><th>Total</th><th>${money(total)}</th><th>${intFmt(rows.reduce((s,r)=>s+num(r.total_orders),0))}</th><th>${intFmt(rows.reduce((s,r)=>s+num(r.units_sold),0))}</th></tr></tbody></table>`}
+function renderOrders(rows){const keys=['order_id','order_date','customer_id','product_id','quantity','unit_price','status','region'];const actual=keys.filter(k=>rows.some(r=>Object.hasOwn(r,k)));const shown=[...rows].sort((a,b)=>dateStr(b.order_date).localeCompare(dateStr(a.order_date))).slice(0,12);$('ordersTableWrap').innerHTML=shown.length?'<table><thead><tr>'+actual.map(k=>'<th>'+esc(k.replace('_',' '))+'</th>').join('')+'</tr></thead><tbody>'+shown.map(r=>'<tr>'+actual.map(k=>'<td>'+esc(k==='unit_price'?money(num(r[k])):String(r[k]??'—'))+'</td>').join('')+'</tr>').join('')+'</tbody></table>':'<div class="empty">No matching orders.</div>'}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function updateReadiness(){const specs=[['Daily Sales Gold','daily'],['Product Gold','product'],['Regional Gold','regional'],['Silver Orders','orders']];$('readinessBody').innerHTML=specs.map(([label,key])=>`<tr><td>${label}</td><td><span class="status" style="background:${data[key].length?'#e5f8ef':'#edf2f7'};color:${data[key].length?'#087b54':'#60748c'}">${data[key].length?'Loaded':key==='orders'?'Optional':'Waiting'}</span></td><td>${data[key].length?intFmt(data[key].length):'—'}</td></tr>`).join('');const regions=data.regional.map(r=>String(r.region||''));populateSelect('regionFilter',regions,'All regions');populateSelect('statusFilter',data.orders.map(r=>String(r.status||'')),'All statuses');const dates=data.daily.map(r=>dateStr(r.order_date)).filter(Boolean).sort();if(dates.length){$('dateFrom').min=dates[0];$('dateFrom').max=dates.at(-1);$('dateTo').min=dates[0];$('dateTo').max=dates.at(-1);if(!$('dateFrom').value)$('dateFrom').value=dates[0];if(!$('dateTo').value)$('dateTo').value=dates.at(-1)}}
+['dateFrom','dateTo','regionFilter','statusFilter'].forEach(id=>$(id).addEventListener('change',updateDashboard));
+$('resetBtn').addEventListener('click',()=>{$('dateFrom').value='';$('dateTo').value='';$('regionFilter').value='';$('statusFilter').value='';updateDashboard()});
+updateReadiness();updateDashboard();
+</script>
+</body>
+</html>
